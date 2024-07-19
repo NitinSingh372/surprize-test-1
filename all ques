@@ -1,0 +1,125 @@
+Q1. Create an API in Node.js with GET and POST methods: 
+    Create a Node.js API that manages a simple todo list. The API should have two endpoints: 
+    GET /todos: This endpoint should return a JSON array of all the todo items in the list. 
+    Each todo item should have an id, title, and completed property.
+    POST /addTodo: This endpoint should create a new todo item and add it to the list. The request body should be a       
+    JSON object with a title property. The response should be a JSON object with the newly created todo item, including  its id.
+
+Answer:-1
+
+Creating the API:
+// index.js (or app.js)
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(bodyParser.json());
+
+// In-memory todo list (for demonstration purposes)
+const todos = [];
+
+// GET /todos
+app.get('/todos', (req, res) => {
+  res.json(todos);
+});
+
+// POST /addTodo
+app.post('/addTodo', (req, res) => {
+  const { title } = req.body;
+  if (!title) {
+    return res.status(400).json({ error: 'Title is required' });
+  }
+
+  const newTodo = {
+    id: todos.length + 1,
+    title,
+    completed: false,
+  };
+
+  todos.push(newTodo);
+  res.status(201).json(newTodo);
+});
+
+app.listen(PORT, () => {
+  console.log(Server running on port ${PORT});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q2. Explain the concept of the DOM (Document Object Model) and its role in JavaScript. 
+Discuss how to manipulate the DOM to create dynamic web pages, handle user interactions, 
+and modify the visual representation of content.
+
+Answer:-
+The DOM (Document Object Model): The DOM represents the structure of an HTML or XML document as a tree of objects. It allows JavaScript to interact with and manipulate the content of a web page dynamically. Key points:
+Role of the DOM:
+Provides a structured representation of the document.
+Allows scripts to access and modify document content.
+Enables event handling (e.g., responding to user clicks).
+Manipulating the DOM:
+Selecting Elements:
+Use methods like getElementById, querySelector, or getElementsByClassName to select elements.
+Modifying Content:
+Change text, attributes, or HTML structure using properties like textContent, innerHTML, or setAttribute.
+Creating Elements:
+Use document.createElement to create new elements.
+Appending/Removing Elements:
+Add elements to the DOM using appendChild or remove them with removeChild.
+Handling Events:
+Attach event listeners using methods like addEventListener.
+Example (Creating an Element):
+
+const newParagraph = document.createElement('p');
+newParagraph.textContent = 'Hello, world!';
+document.body.appendChild(newParagraph);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q3: what is the difference between sort  method and map method? Give examples.
+
+Answer:--
+::sort Method:
+Used to sort an array in place (mutates the original array).
+Sorts elements based on a provided comparison function.
+Example :
+const numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+numbers.sort((a, b) => a - b); // Ascending order
+
+::map Method:
+Creates a new array by applying a function to each element of the original array.
+Does not mutate the original array.
+Example :
+const doubledNumbers = numbers.map((num) => num * 2);
+
+sort-> modifies the original array and sorts it.
+map-> creates a new array by transforming
